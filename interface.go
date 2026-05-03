@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	//"time"
 )
 
@@ -158,7 +158,7 @@ import (
 // 	}
 // }   This is how we can use a type switch to determine the type of the expense and get the appropriate report
 
-func main() {
+//func main() {
 	// test(birthdayMessage{   //This is how we initialize the birthdayMessage struct, we have to specify the struct name and then the fields of that struct
 	// 	birthdayTime: time.Date(2024, time.June, 15, 0, 0, 0, 0, time.UTC),
 	// 	recipientName: "Sunny",
@@ -217,4 +217,4 @@ func main() {
 	// }
 	// test(s)
 	// test(invalid{})
-}
+//}

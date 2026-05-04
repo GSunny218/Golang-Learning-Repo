@@ -72,7 +72,7 @@ import (
 // 	fmt.Printf("Qoutient: %.2f\n",quotient)
 // }
 
-func main() {
+//func main() {
 	//Error Interface test function called
 	//test("Hello, customer!", "Hello, spouse!")
 
@@ -84,4 +84,4 @@ func main() {
 	//Error Packages test function called
 // 	test(8, 0)
 // 	test(8, 2)
-}
+//}

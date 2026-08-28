@@ -102,7 +102,7 @@ import (
 // 	fmt.Println("======= END REPORT ========")
 // }
 
-func main() {
+//func main() {
 	//Array send func called
 	// send("Bob",0)
 	// send("Alice",1)
@@ -127,4 +127,4 @@ func main() {
 // test(1.0,2.0,3.0)
 // test(1.0,2.0,3.0,4.0,5.0)
 // test(1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0)
-}
+//}

@@ -1,5 +1,5 @@
 package main;
-import ("fmt");
+//import ("fmt");
 //func main() {
 	// nums := []int{6,7,8};
 	//Sum of array using range

@@ -1,8 +1,8 @@
 package main
 
-import (
-	"fmt"
-)
+// import (
+// 	"fmt"
+// )
 
 // func printSlice[T any](items []T) {  // Can take any type as parameter
 // 	for _, item := range items {
@@ -28,25 +28,25 @@ import (
 // 	}
 // }
 
-type stack[T any] struct {
-	elements []T
-}
+// type stack[T any] struct {
+// 	elements []T
+// }
 
-func main() {
-	// nums := []int{1,2,3,4,5};
-	// names := []string{"golang", "java"};
-	// booleans := []bool{true, false, true};
-	// printSlice(nums);
-	// printSlice(names);
-	// printSlice(booleans);
-	// printSlice(nums, "John");
+// func main() {
+// 	// nums := []int{1,2,3,4,5};
+// 	// names := []string{"golang", "java"};
+// 	// booleans := []bool{true, false, true};
+// 	// printSlice(nums);
+// 	// printSlice(names);
+// 	// printSlice(booleans);
+// 	// printSlice(nums, "John");
 
-	myStack := stack[int]{
-		elements: []int{1, 2, 3, 4},
-	}
-	myStringStack := stack[string]{
-		elements: []string{"golang", "java"},
-	}
-	fmt.Println(myStack)
-	fmt.Println(myStringStack)
-}
+// 	myStack := stack[int]{
+// 		elements: []int{1, 2, 3, 4},
+// 	}
+// 	myStringStack := stack[string]{
+// 		elements: []string{"golang", "java"},
+// 	}
+// 	fmt.Println(myStack)
+// 	fmt.Println(myStringStack)
+// }

@@ -1,10 +1,10 @@
 package main
 
-import (
-	"fmt"
+// import (
+// 	"fmt"
 	//"time"
 	//"math/rand"
-)
+// )
 
 // func processNum(numChan chan int) { //For sending
 // 	for  num := range numChan {
@@ -33,7 +33,7 @@ import (
 // 	}
 // }
 
-func main() {
+// func main() {
 	// messageChan := make(chan string);  //Create a channel of type string
 	// messageChan <- "ping";  // Send a message to the channel
 	// mainMessage := <-messageChan;  // Receive a message from the channel
@@ -70,20 +70,20 @@ func main() {
 	// fmt.Println(<-emailChan);
 	// fmt.Println(<-emailChan);
 
-	chan1 := make(chan int)
-	chan2 := make(chan string)
-	go func() {
-		chan1 <- 10
-	}()
-	go func() {
-		chan2 <- "Hello"
-	}()
-	for i := 0; i < 2; i++ {
-		select {
-		case chan1Val := <-chan1:
-			fmt.Println("Received data from chan1", chan1Val)
-		case chan2Val := <-chan2:
-			fmt.Println("Received data from chan2", chan2Val)
-		}
-	}
-}
+// 	chan1 := make(chan int)
+// 	chan2 := make(chan string)
+// 	go func() {
+// 		chan1 <- 10
+// 	}()
+// 	go func() {
+// 		chan2 <- "Hello"
+// 	}()
+// 	for i := 0; i < 2; i++ {
+// 		select {
+// 		case chan1Val := <-chan1:
+// 			fmt.Println("Received data from chan1", chan1Val)
+// 		case chan2Val := <-chan2:
+// 			fmt.Println("Received data from chan2", chan2Val)
+// 		}
+// 	}
+// }

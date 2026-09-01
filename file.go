@@ -1,12 +1,12 @@
 package main
 
-import (
+// import (
 	//"bufio"
-	"fmt"
-	"os"
-)
+// 	"fmt"
+// 	"os"
+// )
 
-func main() {
+// func main() {
 	// 	f, err := os.Open("example.txt"); //Opens files
 	// 	if(err != nil) {
 	// 		//log the error
@@ -97,9 +97,9 @@ func main() {
 	// fmt.Println("Written to new file successfully!");
 
 	//Delete a file
-	err := os.Remove("example2.txt"); //deletes file
-	if err != nil {
-		panic(err);
-	}
-	fmt.Println("File deleted successfully!");
-}
+// 	err := os.Remove("example2.txt"); //deletes file
+// 	if err != nil {
+// 		panic(err);
+// 	}
+// 	fmt.Println("File deleted successfully!");
+// }

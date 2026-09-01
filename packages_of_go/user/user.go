@@ -1,5 +1,5 @@
 package user;
-type User struct {
-	Email string
-	Name string
-}
+// type User struct {
+// 	Email string
+// 	Name string
+// }

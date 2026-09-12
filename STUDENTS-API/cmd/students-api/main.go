@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"log/slog"
 	"net/http"
@@ -10,37 +9,37 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+
 	"github.com/sunny/students-api/internal/config"
-);
+	"github.com/sunny/students-api/internal/http/handler/student"
+)
+
 func main() {
 	//load config
-	cfg := config.MustLoad();
+	cfg := config.MustLoad()
 	//setup router
-	router := http.NewServeMux();
-	router.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Welcome to the Students API!"));
-	});
-	server := http.Server {
-		Addr: cfg.Addr,
+	router := http.NewServeMux()
+	router.HandleFunc("POST /api/students", student.New())
+	server := http.Server{
+		Addr:    cfg.HTTPServer.Addr,
 		Handler: router,
 	}
-	slog.Info("Server started %s", slog.String("address", cfg.Addr));
-	done := make(chan os.Signal, 1);
-	signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM);
+	slog.Info("Starting server", "address", server.Addr)
+	done := make(chan os.Signal, 1)
+	signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 	go func() {
-		err := server.ListenAndServe();
-		if err != nil {
-			log.Fatal("Failed to start server");
+		err := server.ListenAndServe()
+		if err != nil && err != http.ErrServerClosed {
+			log.Fatalf("Failed to start server: %v", err)
 		}
-		fmt.Println("Server started on", cfg.Addr);
 	}()
-	<- done;
-	slog.Info("Shutting down server...");
-	ctx, cancel := context.WithTimeout(context.Background(), 5 * time.Second);
-	defer cancel();
-	err := server.Shutdown(ctx);
+	<-done
+	slog.Info("Shutting down server...")
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	err := server.Shutdown(ctx)
 	if err != nil {
-		slog.Error("Failed to shutdown server", "error", slog.String("error", err.Error()));
+		slog.Error("Failed to shutdown server", "error", err)
 	}
-	slog.Info("Server shutdown successfully"); // Log a message indicating that the server has been shut down successfully
+	slog.Info("Server shutdown successfully")
 }

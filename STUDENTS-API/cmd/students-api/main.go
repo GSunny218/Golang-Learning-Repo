@@ -12,11 +12,18 @@ import (
 
 	"github.com/sunny/students-api/internal/config"
 	"github.com/sunny/students-api/internal/http/handler/student"
+	"github.com/sunny/students-api/internal/storage/sqlite"
 )
 
 func main() {
 	//load config
 	cfg := config.MustLoad()
+	//database setup
+	_, err := sqlite.New(cfg);
+	if err != nil {
+		log.Fatal(err);
+	}
+	slog.Info("Storage initialized", slog.String("env", cfg.Env), slog.String("version", "1.0.0"));
 	//setup router
 	router := http.NewServeMux()
 	router.HandleFunc("POST /api/students", student.New())

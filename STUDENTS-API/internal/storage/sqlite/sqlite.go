@@ -7,10 +7,7 @@ import (
 	"path/filepath"
 
 	"github.com/sunny/students-api/internal/config"
-	"github.com/sunny/students-api/internal/http/handler/student"
 	"github.com/sunny/students-api/internal/types"
-
-	//"golang.org/x/tools/go/analysis/passes/defers"
 	_ "modernc.org/sqlite"
 )
 
@@ -78,25 +75,30 @@ func (s *Sqlite) GetStudentById(id int64) (types.Student, error) {
 	return student, nil
 }
 
-func (s *Sqlite) GetStudents() (types.Student, error) {
+func (s *Sqlite) GetStudents() ([]types.Student, error) {
 	stmt, err := s.Db.Prepare("SELECT id, name, email, age FROM students")
 	if err != nil {
 		return nil, err
 	}
 	defer stmt.Close()
+
 	rows, err := stmt.Query()
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
+
 	var students []types.Student
 	for rows.Next() {
 		var student types.Student
-		err := rows.Scan(&student.Id, &student.Name, &student.Email, &student.Age)
-		if err != nil {
+		if err := rows.Scan(&student.Id, &student.Name, &student.Email, &student.Age); err != nil {
 			return nil, err
 		}
 		students = append(students, student)
 	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
 	return students, nil
 }

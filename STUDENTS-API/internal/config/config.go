@@ -12,9 +12,9 @@ type HTTPServer struct {
 	Addr string `yaml:"address" env-required:"true"`
 }
 type Config struct {
-	Env          string     `yaml:"env" env-default:"production"`
-	StoragePatch string     `yaml:"storage_path" env-required:"true"`
-	HTTPServer   HTTPServer `yaml:"http_server"`
+	Env         string     `yaml:"env" env-default:"production"`
+	StoragePath string     `yaml:"storage_path" env-required:"true"`
+	HTTPServer  HTTPServer `yaml:"http_server"`
 }
 
 func MustLoad() *Config {

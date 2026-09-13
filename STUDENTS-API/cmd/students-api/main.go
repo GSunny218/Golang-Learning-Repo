@@ -19,14 +19,16 @@ func main() {
 	//load config
 	cfg := config.MustLoad()
 	//database setup
-	_, err := sqlite.New(cfg);
+	storage, err := sqlite.New(*cfg)
 	if err != nil {
-		log.Fatal(err);
+		log.Fatal(err)
 	}
-	slog.Info("Storage initialized", slog.String("env", cfg.Env), slog.String("version", "1.0.0"));
+	slog.Info("Storage initialized", slog.String("env", cfg.Env), slog.String("version", "1.0.0"))
 	//setup router
 	router := http.NewServeMux()
-	router.HandleFunc("POST /api/students", student.New())
+	router.HandleFunc("POST /api/students", student.New(storage))
+	router.HandleFunc("GET /api/students/{id}", student.GetById(storage))
+	router.HandleFunc("GET /api/students/{id}", student.GetList(storage))
 	server := http.Server{
 		Addr:    cfg.HTTPServer.Addr,
 		Handler: router,
@@ -44,7 +46,7 @@ func main() {
 	slog.Info("Shutting down server...")
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	err := server.Shutdown(ctx)
+	err = server.Shutdown(ctx)
 	if err != nil {
 		slog.Error("Failed to shutdown server", "error", err)
 	}
